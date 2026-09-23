@@ -159,6 +159,8 @@ function finishTest() {
 }
 async function sendResults(meanRT, minRT, maxRT) {
 
+    message.innerText = "データ送信中...";
+    
     const now = new Date();
 
     // 実施日時
@@ -194,22 +196,28 @@ async function sendResults(meanRT, minRT, maxRT) {
 
     try {
 
-        const response = await fetch(GAS_URL, {
-            method: "POST",
-            body: JSON.stringify(sendData)
-        });
+    const response = await fetch(GAS_URL, {
+        method: "POST",
+        body: JSON.stringify(sendData)
+    });
 
-        const result = await response.json();
+    message.innerText =
+        "GASから応答あり：" + response.status;
 
-        if (result.status === "success") {
-            console.log("送信成功", result);
-        } else {
-            console.error("GASエラー", result);
-        }
+    const result = await response.json();
 
-    } catch (error) {
-
-        console.error("送信失敗", error);
-
+    if (result.status === "success") {
+        message.innerText =
+            "検査終了・データ送信完了";
+    } else {
+        message.innerText =
+            "GASエラー：" + result.message;
     }
+
+} catch (error) {
+
+    message.innerText =
+        "通信失敗：" + error.message;
+
+    console.error(error);
 }
