@@ -199,11 +199,12 @@ async function sendResults(meanRT, minRT, maxRT) {
     Lapse：${lapseCount}<br>
     False Start：${falseStartCount}<br><br>
 
-    <strong>ウインドウが自動で閉じるまでお待ちください</strong>
+    <strong>自動でアプリに戻ります。<br>
+    そのままお待ちください。</strong>
 `;
 
 setTimeout(() => {
-    window.close();
+    window.location.href = "https://www.yahoo.co.jp";
 }, 2000);
 
 } catch (error) {
