@@ -1,4 +1,4 @@
-alert("JS読み込み成功");
+
 const GAS_URL =
 "https://script.google.com/macros/s/AKfycbxQtcgLhVls-tRFhXozax0SlhAPwdqnioB3NIz0IoSkhKG9X_xWwbu3uN5u49Ax223R/exec";
 
@@ -189,16 +189,22 @@ async function sendResults(meanRT, minRT, maxRT) {
     });
 
     message.innerHTML = `
-        <h3>検査終了</h3>
+    <h3>検査終了</h3>
 
-        データ送信処理完了<br><br>
+    データ送信処理完了<br><br>
 
-        平均：${meanRT} ms<br>
-        最速：${minRT} ms<br>
-        最遅：${maxRT} ms<br>
-        Lapse：${lapseCount}<br>
-        False Start：${falseStartCount}
-    `;
+    平均：${meanRT} ms<br>
+    最速：${minRT} ms<br>
+    最遅：${maxRT} ms<br>
+    Lapse：${lapseCount}<br>
+    False Start：${falseStartCount}<br><br>
+
+    <strong>ウインドウが自動で閉じるまでお待ちください</strong>
+`;
+
+setTimeout(() => {
+    window.close();
+}, 2000);
 
 } catch (error) {
 
