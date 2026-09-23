@@ -1,3 +1,4 @@
+alert("JS読み込み成功");
 const GAS_URL =
 "https://script.google.com/macros/s/AKfycbxQtcgLhVls-tRFhXozax0SlhAPwdqnioB3NIz0IoSkhKG9X_xWwbu3uN5u49Ax223R/exec";
 
