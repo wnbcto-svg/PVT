@@ -138,30 +138,7 @@ async function finishTest() {
     );
 }
 
-    message.innerHTML =
-        `
-        <h3>検査終了</h3>
 
-        平均：
-        ${Math.round(avg)} ms<br>
-
-        最速：
-        ${Math.round(fastest)} ms<br>
-
-        最遅：
-        ${Math.round(slowest)} ms<br>
-
-        Lapse：
-        ${lapseCount}<br>
-
-        False Start：
-        ${falseStartCount}
-        `;
-
-    target.style.display = "none";
-
-    console.log(results);
-}
 async function sendResults(meanRT, minRT, maxRT) {
 
     message.innerText = "データ送信中...";
