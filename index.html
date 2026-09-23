@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PVT Test</title>
+
+<style>
+
+body{
+    font-family:sans-serif;
+    text-align:center;
+    padding-top:50px;
+}
+
+#target{
+    width:250px;
+    height:250px;
+    margin:30px auto;
+    background:#cccccc;
+    border-radius:20px;
+}
+
+.waiting{
+    background:#cccccc !important;
+}
+
+.active{
+    background:red !important;
+}
+
+button{
+    padding:15px 30px;
+    font-size:20px;
+}
+
+#message{
+    font-size:24px;
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>PVT検査</h2>
+
+<div id="subject"></div>
+
+<div id="message">
+スタートを押してください
+</div>
+
+<div id="target" class="waiting"></div>
+
+<button id="startBtn">
+スタート
+</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
