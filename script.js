@@ -177,24 +177,21 @@ async function sendResults(meanRT, minRT, maxRT) {
         results: results
     };
 
-    try {
+ try {
 
-    const response = await fetch(GAS_URL, {
+    await fetch(GAS_URL, {
         method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain"
+        },
         body: JSON.stringify(sendData)
     });
-
-    message.innerText =
-        "GASから応答あり：" + response.status;
-
-    const result = await response.json();
-
-    if (result.status === "success") {
 
     message.innerHTML = `
         <h3>検査終了</h3>
 
-        データ送信完了<br><br>
+        データ送信処理完了<br><br>
 
         平均：${meanRT} ms<br>
         最速：${minRT} ms<br>
@@ -203,12 +200,6 @@ async function sendResults(meanRT, minRT, maxRT) {
         False Start：${falseStartCount}
     `;
 
-} else {
-
-    message.innerText =
-        "GASエラー：" + result.message;
-}
-
 } catch (error) {
 
     message.innerText =
@@ -216,4 +207,5 @@ async function sendResults(meanRT, minRT, maxRT) {
 
     console.error(error);
 }
+
 }
