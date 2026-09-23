@@ -114,7 +114,7 @@ trialFalseStartCount++;
     setTimeout(nextTrial, 1000);
 });
 
-function finishTest() {
+async function finishTest() {
 
     const avg =
         reactionTimes.reduce(
@@ -127,11 +127,16 @@ function finishTest() {
     const slowest =
         Math.max(...reactionTimes);
 
-    sendResults(
-    Math.round(avg),
-    fastest,
-    slowest
-);
+    target.style.display = "none";
+
+    message.innerText = "データ送信中...";
+
+    await sendResults(
+        Math.round(avg),
+        Math.round(fastest),
+        Math.round(slowest)
+    );
+}
 
     message.innerHTML =
         `
@@ -207,12 +212,24 @@ async function sendResults(meanRT, minRT, maxRT) {
     const result = await response.json();
 
     if (result.status === "success") {
-        message.innerText =
-            "検査終了・データ送信完了";
-    } else {
-        message.innerText =
-            "GASエラー：" + result.message;
-    }
+
+    message.innerHTML = `
+        <h3>検査終了</h3>
+
+        データ送信完了<br><br>
+
+        平均：${meanRT} ms<br>
+        最速：${minRT} ms<br>
+        最遅：${maxRT} ms<br>
+        Lapse：${lapseCount}<br>
+        False Start：${falseStartCount}
+    `;
+
+} else {
+
+    message.innerText =
+        "GASエラー：" + result.message;
+}
 
 } catch (error) {
 
@@ -220,4 +237,5 @@ async function sendResults(meanRT, minRT, maxRT) {
         "通信失敗：" + error.message;
 
     console.error(error);
+}
 }
